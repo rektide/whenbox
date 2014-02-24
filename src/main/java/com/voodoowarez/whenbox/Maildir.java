@@ -29,6 +29,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
+import javax.ws.rs.ext.Provider;
 
 import org.apache.log4j.BasicConfigurator;
 
@@ -36,8 +37,9 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
 
-@SessionScoped
 @Path("/{domain}/{user}/mailbox")
+@Provider
+@SessionScoped
 public class Maildir {
 
 	static {
@@ -54,7 +56,7 @@ public class Maildir {
 
 	@Inject
 	private Store store;
-	
+
 	static private JsonFactory jsonFactory = new JsonFactory();
 	static private int batchRead = 333;
 	static private Flag[] flags = new Flag[]{Flags.Flag.ANSWERED, Flags.Flag.DELETED, Flags.Flag.DRAFT, Flags.Flag.FLAGGED, Flags.Flag.RECENT, Flags.Flag.SEEN, Flags.Flag.USER};
